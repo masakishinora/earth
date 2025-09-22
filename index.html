@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ダンスマス2025　出演希望＆DVD購入希望</title>
+    <style>
+        body { font-family: sans-serif; }
+        .container { max-width: 700px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="number"], input[type="text"], input[type="email"], select { width: 100%; padding: 8px; box-sizing: border-box; }
+        input[type="number"] { text-align: center; }
+        input[type="checkbox"] { display: block; margin: 0 auto; width: 20px; height: 20px; }
+        .subtotal { text-align: right; }
+        #total-amount-container { text-align: right; font-size: 1.2em; margin-top: 20px; font-weight: bold; }
+        .fee-details { text-align: right; margin: -10px 0 10px 0; color: #555; }
+        .discount-details { text-align: right; color: #d9534f; font-weight: bold; }
+        #confirmation-screen, #loading, #thank-you { display: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="input-screen">
+        <h2>ダンスマス2025　出演希望＆DVD購入希望</h2>
+        <form id="product-form">
+            <div class="form-group"><label for="customer-name">出演者のお名前:</label><input type="text" id="customer-name" name="name" required></div>
+            <div class="form-group"><label for="customer-email">メールアドレス:</label><input type="email" id="customer-email" name="email" required></div>
+            
+            <hr style="margin: 20px 0;">
+
+            <table id="product-table">
+                <thead>
+                    <tr><th>出演作品 / 商品名</th><th>選択</th><th style="text-align: right;">小計（円）</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="product-item" data-id="baby_quantity" data-name="Babyクラス">
+                        <td>Babyクラス（チケット5枚付き）</td>
+                        <td><input type="checkbox" class="quantity is-baby"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="Kid'sHIPHOP(RIRICA)">
+                        <td>Kid'sHIPHOP(RIRICA)</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="Kid'sHOUSE">
+                        <td>Kid'sHOUSE</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="HOUSE(RIRICA)">
+                        <td>HOUSE(RIRICA)</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="アクロバットアクション">
+                        <td>アクロバットアクション</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="HIPHOP基礎">
+                        <td>HIPHOP基礎</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="FREESTYLE(MINAMI)">
+                        <td>FREESTYLE(MINAMI)</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="FREESTYLE(kAho)">
+                        <td>FREESTYLE(kAho)</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="Kid'sテーマパーク">
+                        <td>Kid'sテーマパーク</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="JAZZ">
+                        <td>JAZZ</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="LYRICALJAZZ初級">
+                        <td>LYRICALJAZZ初級</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="LYRICALJAZZ上級">
+                        <td>LYRICALJAZZ上級</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="HIPHOP上級">
+                        <td>HIPHOP上級</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="Kid's入門">
+                        <td>Kid's入門</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="JAZZFUNK">
+                        <td>JAZZFUNK</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="JAZZ入門">
+                        <td>JAZZ入門</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="BREAKING'">
+                        <td>BREAKING'</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="Kid'sK-POP">
+                        <td>Kid'sK-POP</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="Kid'sバレエ入門">
+                        <td>Kid'sバレエ入門</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="Kid'sバレエ応用">
+                        <td>Kid'sバレエ応用</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="Kid'sJAZZ">
+                        <td>Kid'sJAZZ</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="Kid'sHIPHOP(kAho)">
+                        <td>Kid'sHIPHOP(kAho)</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="STYLEHIPHOP">
+                        <td>STYLEHIPHOP</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="GIRLSHIPHOP">
+                        <td>GIRLSHIPHOP</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="ANIMATION">
+                        <td>ANIMATION</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="コンテンポラリー初級">
+                        <td>コンテンポラリー初級</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="コンテンポラリー上級">
+                        <td>コンテンポラリー上級</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="楽しいダンス">
+                        <td>楽しいダンス</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="HOUSE初級">
+                        <td>HOUSE初級</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="HOUSE上級">
+                        <td>HOUSE上級</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="Kid'sLOCKIN'">
+                        <td>Kid'sLOCKIN'</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="LOCKIN'">
+                        <td>LOCKIN'</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="完コピ">
+                        <td>完コピ</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-name="有志">
+                        <td>有志</td>
+                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                    </tr>
+                    <tr class="product-item" data-id="dvd_quantity" data-price="3800" data-name="DVD">
+                        <td>DVD</td>
+                        <td><input type="number" class="quantity" value="0" min="0" style="width: 60px; display: inline-block;"> 枚</td>
+                        <td class="subtotal">0</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="form-group">
+                <label for="family-discount">家族割:</label>
+                <select id="family-discount">
+                    <option value="1" data-discount="0">なし</option>
+                    <option value="2" data-discount="1000">2名 (-1,000円)</option>
+                    <option value="3" data-discount="3000">3名 (-3,000円)</option>
+                    <option value="4" data-discount="5000">4名 (-5,000円)</option>
+                </select>
+                <p style="font-size: 0.8em; color: #777; margin-top: 5px;">
+                    （出演家族総数）<br>
+                    ※家族割は出演する家族の中で一人だけに入れてください。重複申請がないようにご注意ください。
+                </p>
+            </div>
+            <div id="family-names-container"></div>
+            
+            <hr style="margin: 20px 0;">
+
+            <div id="fee-breakdown" class="fee-details"></div>
+            <div id="discount-display" class="discount-details"></div>
+            <div id="total-amount-container">合計金額: <span id="total-amount">0</span> 円</div>
+            <hr>
+            <button type="button" id="confirm-button">お申し込み内容の確認へ</button>
+        </form>
+    </div>
+
+    <div id="confirmation-screen"><h2>お申し込み内容の確認</h2><div id="confirmation-details"></div><hr><button type="button" id="back-button">修正する</button><button type="button" id="submit-button">この内容で申し込む</button></div>
+    <div id="loading">送信中です...</div>
+    <div id="thank-you"><h2>お申し込み完了</h2><p>お申し込みありがとうございました。確認メールをお送りしましたので、ご確認ください。</p></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // 要素の取得
+    const inputScreen = document.getElementById('input-screen');
+    const confirmationScreen = document.getElementById('confirmation-screen');
+    const confirmButton = document.getElementById('confirm-button');
+    const backButton = document.getElementById('back-button');
+    const submitButton = document.getElementById('submit-button');
+    const loadingScreen = document.getElementById('loading');
+    const thankYouScreen = document.getElementById('thank-you');
+    const familyDiscountSelect = document.getElementById('family-discount');
+    const familyNamesContainer = document.getElementById('family-names-container');
+    
+    // 家族割の選択に応じて名前入力欄を動的に生成する関数
+    function handleFamilyDiscountChange() {
+        const selectedCount = parseInt(familyDiscountSelect.value, 10);
+        familyNamesContainer.innerHTML = '';
+        if (selectedCount > 1) {
+            for (let i = 1; i < selectedCount; i++) {
+                const nameInputHTML = `<div class="form-group"><label for="family-name-${i}">家族のお名前 ${i}:</label><input type="text" id="family-name-${i}" class="family-name-input" required></div>`;
+                familyNamesContainer.insertAdjacentHTML('beforeend', nameInputHTML);
+            }
+        }
+        calculateTotal();
+    }
+
+    // 金額計算ロジック
+    function calculateTotal() {
+        let grossTotal = 0;
+        const feeBreakdownDiv = document.getElementById('fee-breakdown');
+        
+        const isBabyChecked = document.querySelector('.is-baby').checked;
+        const classCount = document.querySelectorAll('.is-class:checked').length;
+        const baseFee = 5500;
+        if (isBabyChecked || classCount > 0) grossTotal += baseFee;
+        
+        const babyFee = 12500;
+        if (isBabyChecked) grossTotal += babyFee;
+        
+        let classPrice = 0;
+        if (classCount > 0) {
+            if (classCount === 1) { classPrice = 15000; }
+            else if (classCount === 2) { classPrice = 20000; }
+            else if (classCount === 3) { classPrice = 22500; }
+            else if (classCount > 3) { classPrice = 22500 + (classCount - 3) * 2500; }
+            grossTotal += classPrice;
+        }
+        
+        document.querySelector('.is-baby').closest('tr').querySelector('.subtotal').textContent = isBabyChecked ? '下記合計' : '-';
+        document.querySelectorAll('.is-class').forEach(checkbox => {
+            checkbox.closest('tr').querySelector('.subtotal').textContent = classCount > 0 ? '下記合計' : '-';
+        });
+
+        const dvdRow = document.querySelector('[data-name="DVD"]');
+        const dvdPrice = parseInt(dvdRow.dataset.price, 10);
+        const dvdQuantity = parseInt(dvdRow.querySelector('.quantity').value, 10) || 0;
+        const dvdTotalPrice = dvdPrice * dvdQuantity;
+        // ▼▼▼ DVDの小計表示を復元 ▼▼▼
+        dvdRow.querySelector('.subtotal').textContent = dvdTotalPrice.toLocaleString();
+        grossTotal += dvdTotalPrice;
+        
+        const discountOption = familyDiscountSelect.options[familyDiscountSelect.selectedIndex];
+        const discount = parseInt(discountOption.dataset.discount, 10);
+        document.getElementById('discount-display').textContent = discount > 0 ? `家族割引: -${discount.toLocaleString()}円` : '';
+        
+        const finalTotal = grossTotal - discount;
+        
+        let breakdownText = [];
+        if(isBabyChecked || classCount > 0) breakdownText.push(`基本出演料: ${baseFee.toLocaleString()}円`);
+        if(isBabyChecked) breakdownText.push(`Babyクラス料: ${babyFee.toLocaleString()}円`);
+        if(classCount > 0) breakdownText.push(`チケット費: ${classPrice.toLocaleString()}円`);
+        if (breakdownText.length > 0) {
+            feeBreakdownDiv.innerHTML = `(${breakdownText.join(' + ')})`;
+        } else {
+            feeBreakdownDiv.innerHTML = '';
+        }
+
+        document.getElementById('total-amount').textContent = finalTotal.toLocaleString();
+    }
+    
+    // 確認画面の表示ロジック
+    function showConfirmation() {
+        const detailsContainer = document.getElementById('confirmation-details');
+        detailsContainer.innerHTML = '';
+        const customerName = document.getElementById('customer-name').value;
+        const customerEmail = document.getElementById('customer-email').value;
+        if (!customerName || !customerEmail) { alert('出演者のお名前とメールアドレスを入力してください。'); return; }
+        detailsContainer.innerHTML += `<p><strong>出演者のお名前:</strong> ${customerName}</p><p><strong>メールアドレス:</strong> ${customerEmail}</p><hr>`;
+        const isBabyChecked = document.querySelector('.is-baby').checked;
+        const classCount = document.querySelectorAll('.is-class:checked').length;
+        const dvdQuantity = parseInt(document.querySelector('[data-name="DVD"] .quantity').value, 10) || 0;
+        if (!isBabyChecked && classCount === 0 && dvdQuantity === 0) { alert('出演作品またはDVDが選択されていません。'); return; }
+        const baseFee = 5500;
+        if(isBabyChecked || classCount > 0) detailsContainer.innerHTML += `<p><strong>基本出演料:</strong> ${baseFee.toLocaleString()}円</p>`;
+        if (isBabyChecked) detailsContainer.innerHTML += `<p><strong>Babyクラス出演料 (チケット5枚付き):</strong> 12,500円</p>`;
+        if (classCount > 0) {
+            let classPrice = 0, ticketCount = 0;
+            if (classCount === 1) { classPrice = 15000; ticketCount = 6; } else if (classCount === 2) { classPrice = 20000; ticketCount = 8; } else if (classCount === 3) { classPrice = 22500; ticketCount = 9; } else { classPrice = 22500 + (classCount - 3) * 2500; ticketCount = 9 + (classCount - 3) * 1; }
+            detailsContainer.innerHTML += `<p><strong>チケット費 (${classCount}クラス):</strong> ${classPrice.toLocaleString()}円</p>`;
+            const selectedClasses = [];
+            document.querySelectorAll('.is-class:checked').forEach(checkbox => { selectedClasses.push(checkbox.closest('.product-item').dataset.name); });
+            detailsContainer.innerHTML += `<div class="selected-classes-list"><strong>選択作品:</strong><br>${selectedClasses.join('<br>')}</div>`;
+            detailsContainer.innerHTML += `<p><strong>付属チケット:</strong> ${ticketCount}枚</p>`;
+        }
+        if (dvdQuantity > 0) detailsContainer.innerHTML += `<p><strong>DVD代:</strong> ${dvdQuantity}枚 (${(3800 * dvdQuantity).toLocaleString()}円)</p>`;
+        const discountOption = familyDiscountSelect.options[familyDiscountSelect.selectedIndex];
+        const discount = parseInt(discountOption.dataset.discount, 10);
+        if(discount > 0) {
+            detailsContainer.innerHTML += `<p style="color: #d9534f;"><strong>家族割引:</strong> -${discount.toLocaleString()}円</p>`;
+            document.querySelectorAll('.family-name-input').forEach((input, index) => {
+                if(input.value) detailsContainer.innerHTML += `<p><strong>家族のお名前 ${index + 1}:</strong> ${input.value}</p>`;
+            });
+        }
+        detailsContainer.innerHTML += `<hr><p><strong>合計金額: ${document.getElementById('total-amount').textContent} 円</strong></p>`;
+        inputScreen.style.display = 'none';
+        confirmationScreen.style.display = 'block';
+    }
+
+    // フォーム送信ロジック
+    function submitForm() {
+        const gasUrl = 'https://script.google.com/macros/s/AKfycbysWM9qYcw4uLthclnhwRQbXBlHVpEpYESiZoeaidGZhjNocDc64jxtSHYL0FjQvWIB/exec';
+        const formData = new FormData();
+        formData.append('name', document.getElementById('customer-name').value);
+        formData.append('email', document.getElementById('customer-email').value);
+        formData.append('baby_quantity', document.querySelector('.is-baby').checked ? '1' : '0');
+        const selectedClasses = [];
+        document.querySelectorAll('.is-class:checked').forEach(checkbox => { selectedClasses.push(checkbox.closest('.product-item').dataset.name); });
+        formData.append('selected_classes', selectedClasses.join(','));
+        formData.append('dvd_quantity', document.querySelector('[data-name="DVD"] .quantity').value);
+        formData.append('family_count', familyDiscountSelect.value);
+        document.querySelectorAll('.family-name-input').forEach((input, index) => {
+            formData.append(`family_name_${index + 1}`, input.value);
+        });
+        confirmationScreen.style.display = 'none';
+        loadingScreen.style.display = 'block';
+        fetch(gasUrl, { method: 'POST', body: formData })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    loadingScreen.style.display = 'none';
+                    thankYouScreen.style.display = 'block';
+                } else {
+                    loadingScreen.style.display = 'none';
+                    alert('送信に失敗しました。');
+                    confirmationScreen.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                loadingScreen.style.display = 'none';
+                alert('エラーが発生しました。通信環境をご確認ください。');
+                confirmationScreen.style.display = 'block';
+            });
+    }
+    
+    // イベントリスナー設定
+    document.querySelectorAll('.quantity').forEach(input => {
+        input.addEventListener('change', calculateTotal);
+        if(input.type === 'number') input.addEventListener('input', calculateTotal);
+    });
+    familyDiscountSelect.addEventListener('change', handleFamilyDiscountChange);
+    confirmButton.addEventListener('click', showConfirmation);
+    backButton.addEventListener('click', () => {
+        confirmationScreen.style.display = 'none';
+        inputScreen.style.display = 'block';
+    });
+    submitButton.addEventListener('click', submitForm);
+
+    handleFamilyDiscountChange();
+});
+</script>
+</body>
+</html>
