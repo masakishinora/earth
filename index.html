@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ダンスマス2025　出演希望＆DVD購入希望</title>
     <style>
         body { font-family: sans-serif; }
@@ -18,7 +19,59 @@
         #total-amount-container { text-align: right; font-size: 1.2em; margin-top: 20px; font-weight: bold; }
         .fee-details { text-align: right; margin: -10px 0 10px 0; color: #555; }
         .discount-details { text-align: right; color: #d9534f; font-weight: bold; }
+        .selected-classes-list { padding-left: 1.2em; color: #555; font-size: 0.9em; line-height: 1.5; }
         #confirmation-screen, #loading, #thank-you { display: none; }
+
+        /* ▼▼▼ 2. 画面が600px以下の時だけ適用されるスタイルを追加 ▼▼▼ */
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            /* テーブルのレイアウトを縦並びに変更 */
+            #product-table thead {
+                display: none; /* 見出し行を非表示に */
+            }
+            #product-table, #product-table tbody, #product-table tr, #product-table td {
+                display: block;
+                width: 100%;
+            }
+            #product-table tr {
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+            }
+            #product-table td {
+                text-align: right; /* 内容を右寄せに */
+                padding-left: 50%; /* 左側にスペースを確保 */
+                position: relative;
+                border: none;
+                border-bottom: 1px solid #eee;
+            }
+            #product-table td:before {
+                /* 非表示にした見出しを、各セルの左側に疑似的に表示 */
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+            }
+            /* 各セルのdata-label属性に表示したい見出しテキストを設定 */
+            #product-table td:nth-of-type(1):before { content: "作品/商品名"; }
+            #product-table td:nth-of-type(2):before { content: "選択"; }
+            #product-table td:nth-of-type(3):before { content: "小計(円)"; }
+            
+            /* チェックボックスとDVD入力欄の位置調整 */
+            #product-table td input[type="checkbox"] {
+                margin: 0 0 0 auto;
+            }
+            #product-table td input[type="number"] {
+                display: inline-block;
+                width: 60px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -37,145 +90,179 @@
                 </thead>
                 <tbody>
                     <tr class="product-item" data-id="baby_quantity" data-name="Babyクラス">
-                        <td>Babyクラス（チケット5枚付き）</td>
-                        <td><input type="checkbox" class="quantity is-baby"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">Babyクラス（チケット5枚付き）</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-baby"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="Kid'sHIPHOP(RIRICA)">
-                        <td>Kid'sHIPHOP(RIRICA)</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">Kid'sHIPHOP(RIRICA)</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="Kid'sHOUSE">
-                        <td>Kid'sHOUSE</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">Kid'sHOUSE</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="HOUSE(RIRICA)">
-                        <td>HOUSE(RIRICA)</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">HOUSE(RIRICA)</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="アクロバットアクション">
-                        <td>アクロバットアクション</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">アクロバットアクション</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="HIPHOP基礎">
-                        <td>HIPHOP基礎</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">HIPHOP基礎</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="FREESTYLE(MINAMI)">
-                        <td>FREESTYLE(MINAMI)</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">FREESTYLE(MINAMI)</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="FREESTYLE(kAho)">
-                        <td>FREESTYLE(kAho)</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">FREESTYLE(kAho)</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="Kid'sテーマパーク">
-                        <td>Kid'sテーマパーク</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">Kid'sテーマパーク</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="JAZZ">
-                        <td>JAZZ</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">JAZZ</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="LYRICALJAZZ初級">
-                        <td>LYRICALJAZZ初級</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">LYRICALJAZZ初級</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="LYRICALJAZZ上級">
-                        <td>LYRICALJAZZ上級</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">LYRICALJAZZ上級</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="HIPHOP上級">
-                        <td>HIPHOP上級</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">HIPHOP上級</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="Kid's入門">
-                        <td>Kid's入門</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">Kid's入門</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="JAZZFUNK">
-                        <td>JAZZFUNK</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">JAZZFUNK</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="JAZZ入門">
-                        <td>JAZZ入門</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">JAZZ入門</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="BREAKING'">
-                        <td>BREAKING'</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">BREAKING'</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="Kid'sK-POP">
-                        <td>Kid'sK-POP</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">Kid'sK-POP</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="Kid'sバレエ入門">
-                        <td>Kid'sバレエ入門</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">Kid'sバレエ入門</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="Kid'sバレエ応用">
-                        <td>Kid'sバレエ応用</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">Kid'sバレエ応用</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="Kid'sJAZZ">
-                        <td>Kid'sJAZZ</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">Kid'sJAZZ</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="Kid'sHIPHOP(kAho)">
-                        <td>Kid'sHIPHOP(kAho)</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">Kid'sHIPHOP(kAho)</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="STYLEHIPHOP">
-                        <td>STYLEHIPHOP</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">STYLEHIPHOP</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="GIRLSHIPHOP">
-                        <td>GIRLSHIPHOP</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">GIRLSHIPHOP</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="ANIMATION">
-                        <td>ANIMATION</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">ANIMATION</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="コンテンポラリー初級">
-                        <td>コンテンポラリー初級</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">コンテンポラリー初級</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="コンテンポラリー上級">
-                        <td>コンテンポラリー上級</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">コンテンポラリー上級</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="楽しいダンス">
-                        <td>楽しいダンス</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">楽しいダンス</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="HOUSE初級">
-                        <td>HOUSE初級</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">HOUSE初級</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="HOUSE上級">
-                        <td>HOUSE上級</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">HOUSE上級</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="Kid'sLOCKIN'">
-                        <td>Kid'sLOCKIN'</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">Kid'sLOCKIN'</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="LOCKIN'">
-                        <td>LOCKIN'</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">LOCKIN'</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="完コピ">
-                        <td>完コピ</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">完コピ</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
                     <tr class="product-item" data-name="有志">
-                        <td>有志</td>
-                        <td><input type="checkbox" class="quantity is-class"></td><td class="subtotal">-</td>
+                        <td data-label="作品/商品名">有志</td>
+                        <td data-label="選択"><input type="checkbox" class="quantity is-class"></td>
+                        <td data-label="小計(円)" class="subtotal">-</td>
                     </tr>
-                    <tr class="product-item" data-id="dvd_quantity" data-price="3800" data-name="DVD">
-                        <td>DVD</td>
-                        <td><input type="number" class="quantity" value="0" min="0" style="width: 60px; display: inline-block;"> 枚</td>
-                        <td class="subtotal">0</td>
+                    <tr class="product-item" data-id="dvd_quantity" data-price="3900" data-name="DVD">
+                        <td data-label="作品/商品名">DVD</td>
+                        <td data-label="選択"><input type="number" class="quantity" value="0" min="0" style="width: 60px; display: inline-block;"> 枚</td>
+                        <td data-label="小計(円)" class="subtotal">0</td>
                     </tr>
                 </tbody>
             </table>
@@ -212,7 +299,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // 要素の取得
+    // 要素の取得 (変更なし)
     const inputScreen = document.getElementById('input-screen');
     const confirmationScreen = document.getElementById('confirmation-screen');
     const confirmButton = document.getElementById('confirm-button');
@@ -223,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const familyDiscountSelect = document.getElementById('family-discount');
     const familyNamesContainer = document.getElementById('family-names-container');
     
-    // 家族割の選択に応じて名前入力欄を動的に生成する関数
+    // 家族割の選択に応じて名前入力欄を動的に生成する関数 (変更なし)
     function handleFamilyDiscountChange() {
         const selectedCount = parseInt(familyDiscountSelect.value, 10);
         familyNamesContainer.innerHTML = '';
@@ -236,61 +323,43 @@ document.addEventListener('DOMContentLoaded', () => {
         calculateTotal();
     }
 
-    // 金額計算ロジック
+    // 金額計算ロジック (変更なし)
     function calculateTotal() {
         let grossTotal = 0;
         const feeBreakdownDiv = document.getElementById('fee-breakdown');
-        
+        feeBreakdownDiv.innerHTML = '';
         const isBabyChecked = document.querySelector('.is-baby').checked;
         const classCount = document.querySelectorAll('.is-class:checked').length;
         const baseFee = 5500;
         if (isBabyChecked || classCount > 0) grossTotal += baseFee;
-        
         const babyFee = 12500;
         if (isBabyChecked) grossTotal += babyFee;
-        
         let classPrice = 0;
         if (classCount > 0) {
-            if (classCount === 1) { classPrice = 15000; }
-            else if (classCount === 2) { classPrice = 20000; }
-            else if (classCount === 3) { classPrice = 22500; }
-            else if (classCount > 3) { classPrice = 22500 + (classCount - 3) * 2500; }
+            if (classCount === 1) { classPrice = 15000; } else if (classCount === 2) { classPrice = 20000; } else if (classCount === 3) { classPrice = 22500; } else if (classCount > 3) { classPrice = 22500 + (classCount - 3) * 2500; }
             grossTotal += classPrice;
         }
-        
         document.querySelector('.is-baby').closest('tr').querySelector('.subtotal').textContent = isBabyChecked ? '下記合計' : '-';
-        document.querySelectorAll('.is-class').forEach(checkbox => {
-            checkbox.closest('tr').querySelector('.subtotal').textContent = classCount > 0 ? '下記合計' : '-';
-        });
-
+        document.querySelectorAll('.is-class').forEach(checkbox => { checkbox.closest('tr').querySelector('.subtotal').textContent = classCount > 0 ? '下記合計' : '-'; });
         const dvdRow = document.querySelector('[data-name="DVD"]');
         const dvdPrice = parseInt(dvdRow.dataset.price, 10);
         const dvdQuantity = parseInt(dvdRow.querySelector('.quantity').value, 10) || 0;
         const dvdTotalPrice = dvdPrice * dvdQuantity;
-        // ▼▼▼ DVDの小計表示を復元 ▼▼▼
         dvdRow.querySelector('.subtotal').textContent = dvdTotalPrice.toLocaleString();
         grossTotal += dvdTotalPrice;
-        
         const discountOption = familyDiscountSelect.options[familyDiscountSelect.selectedIndex];
         const discount = parseInt(discountOption.dataset.discount, 10);
         document.getElementById('discount-display').textContent = discount > 0 ? `家族割引: -${discount.toLocaleString()}円` : '';
-        
         const finalTotal = grossTotal - discount;
-        
         let breakdownText = [];
         if(isBabyChecked || classCount > 0) breakdownText.push(`基本出演料: ${baseFee.toLocaleString()}円`);
         if(isBabyChecked) breakdownText.push(`Babyクラス料: ${babyFee.toLocaleString()}円`);
         if(classCount > 0) breakdownText.push(`チケット費: ${classPrice.toLocaleString()}円`);
-        if (breakdownText.length > 0) {
-            feeBreakdownDiv.innerHTML = `(${breakdownText.join(' + ')})`;
-        } else {
-            feeBreakdownDiv.innerHTML = '';
-        }
-
+        if (breakdownText.length > 0) { feeBreakdownDiv.innerHTML = `(${breakdownText.join(' + ')})`; }
         document.getElementById('total-amount').textContent = finalTotal.toLocaleString();
     }
     
-    // 確認画面の表示ロジック
+    // 確認画面の表示ロジック (変更なし)
     function showConfirmation() {
         const detailsContainer = document.getElementById('confirmation-details');
         detailsContainer.innerHTML = '';
@@ -314,7 +383,10 @@ document.addEventListener('DOMContentLoaded', () => {
             detailsContainer.innerHTML += `<div class="selected-classes-list"><strong>選択作品:</strong><br>${selectedClasses.join('<br>')}</div>`;
             detailsContainer.innerHTML += `<p><strong>付属チケット:</strong> ${ticketCount}枚</p>`;
         }
-        if (dvdQuantity > 0) detailsContainer.innerHTML += `<p><strong>DVD代:</strong> ${dvdQuantity}枚 (${(3800 * dvdQuantity).toLocaleString()}円)</p>`;
+        if (dvdQuantity > 0) {
+            const dvdSubtotal = 3900 * dvdQuantity;
+            detailsContainer.innerHTML += `<p><strong>DVD代:</strong> ${dvdQuantity}枚 (${dvdSubtotal.toLocaleString()}円)</p>`;
+        }
         const discountOption = familyDiscountSelect.options[familyDiscountSelect.selectedIndex];
         const discount = parseInt(discountOption.dataset.discount, 10);
         if(discount > 0) {
@@ -328,9 +400,9 @@ document.addEventListener('DOMContentLoaded', () => {
         confirmationScreen.style.display = 'block';
     }
 
-    // フォーム送信ロジック
+    // フォーム送信ロジック (変更なし)
     function submitForm() {
-        const gasUrl = 'https://script.google.com/macros/s/AKfycbysWM9qYcw4uLthclnhwRQbXBlHVpEpYESiZoeaidGZhjNocDc64jxtSHYL0FjQvWIB/exec';
+        const gasUrl = 'ここに先ほどコピーしたウェブアプリのURLを貼り付け';
         const formData = new FormData();
         formData.append('name', document.getElementById('customer-name').value);
         formData.append('email', document.getElementById('customer-email').value);
@@ -365,7 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
     
-    // イベントリスナー設定
+    // イベントリスナー設定 (変更なし)
     document.querySelectorAll('.quantity').forEach(input => {
         input.addEventListener('change', calculateTotal);
         if(input.type === 'number') input.addEventListener('input', calculateTotal);
