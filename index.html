@@ -25,6 +25,7 @@
         .selected-classes-list { padding-left: 1.2em; color: #555; font-size: 0.9em; line-height: 1.5; }
         #confirmation-screen, #loading, #thank-you { display: none; }
 
+        /* ▼▼▼ スマートフォン表示用のスタイル ▼▼▼ */
         @media (max-width: 600px) {
             .container {
                 margin: 10px;
@@ -416,6 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingScreen.style.display = 'block';
         fetch(gasUrl, { method: 'POST', body: formData })
             .then(response => response.json())
+            // ... (fetchの続きは変更なし)
             .then(data => {
                 if (data.result === 'success') {
                     loadingScreen.style.display = 'none';
