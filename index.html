@@ -325,13 +325,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('total-amount').textContent = finalTotal.toLocaleString();
     }
     
-    // 確認画面の表示ロジック (変更なし)
+    // 確認画面の表示ロジック
     function showConfirmation() {
         const detailsContainer = document.getElementById('confirmation-details');
         detailsContainer.innerHTML = '';
         const customerName = document.getElementById('customer-name').value;
         const customerEmail = document.getElementById('customer-email').value;
-        if (!customerName || !customerEmail) { alert('出演者のお名前（1人ずつお申し込みください）とメールアドレスを入力してください。'); return; }
+        // ▼▼▼ アラートメッセージを元に戻す ▼▼▼
+        if (!customerName || !customerEmail) { alert('出演者のお名前とメールアドレスを入力してください。'); return; }
+        // ▼▼▼ 確認画面の表記を元に戻す ▼▼▼
         detailsContainer.innerHTML += `<p><strong>出演者のお名前:</strong> ${customerName}</p><p><strong>メールアドレス:</strong> ${customerEmail}</p><hr>`;
         const isBabyChecked = document.querySelector('.is-baby').checked;
         const classCount = document.querySelectorAll('.is-class:checked').length;
