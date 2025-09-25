@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ダンスマス2025　出演希望＆DVD購入希望</title>
     <style>
+        /* ▼▼▼ レイアウト崩れを防ぐための設定を追加 ▼▼▼ */
+        * {
+            box-sizing: border-box;
+        }
         body { font-family: sans-serif; }
         .container { max-width: 700px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
@@ -12,7 +16,7 @@
         th { background-color: #f2f2f2; }
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="number"], input[type="text"], input[type="email"], select { width: 100%; padding: 8px; box-sizing: border-box; }
+        input[type="number"], input[type="text"], input[type="email"], select { width: 100%; padding: 8px; }
         input[type="number"] { text-align: center; }
         input[type="checkbox"] { display: block; margin: 0 auto; width: 20px; height: 20px; }
         .subtotal { text-align: right; }
@@ -22,15 +26,13 @@
         .selected-classes-list { padding-left: 1.2em; color: #555; font-size: 0.9em; line-height: 1.5; }
         #confirmation-screen, #loading, #thank-you { display: none; }
 
-        /* ▼▼▼ 2. 画面が600px以下の時だけ適用されるスタイルを追加 ▼▼▼ */
         @media (max-width: 600px) {
             .container {
                 margin: 10px;
                 padding: 15px;
             }
-            /* テーブルのレイアウトを縦並びに変更 */
             #product-table thead {
-                display: none; /* 見出し行を非表示に */
+                display: none;
             }
             #product-table, #product-table tbody, #product-table tr, #product-table td {
                 display: block;
@@ -41,14 +43,13 @@
                 border: 1px solid #ddd;
             }
             #product-table td {
-                text-align: right; /* 内容を右寄せに */
-                padding-left: 50%; /* 左側にスペースを確保 */
+                text-align: right;
+                padding-left: 50%;
                 position: relative;
                 border: none;
                 border-bottom: 1px solid #eee;
             }
             #product-table td:before {
-                /* 非表示にした見出しを、各セルの左側に疑似的に表示 */
                 content: attr(data-label);
                 position: absolute;
                 left: 10px;
@@ -58,12 +59,13 @@
                 text-align: left;
                 font-weight: bold;
             }
-            /* 各セルのdata-label属性に表示したい見出しテキストを設定 */
+            #product-table td:last-child {
+                border-bottom: none;
+            }
             #product-table td:nth-of-type(1):before { content: "作品/商品名"; }
             #product-table td:nth-of-type(2):before { content: "選択"; }
             #product-table td:nth-of-type(3):before { content: "小計(円)"; }
             
-            /* チェックボックスとDVD入力欄の位置調整 */
             #product-table td input[type="checkbox"] {
                 margin: 0 0 0 auto;
             }
@@ -402,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // フォーム送信ロジック (変更なし)
     function submitForm() {
-        const gasUrl = 'ここに先ほどコピーしたウェブアプリのURLを貼り付け';
+        const gasUrl = 'https://script.google.com/macros/s/AKfycbysWM9qYcw4uLthclnhwRQbXBlHVpEpYESiZoeaidGZhjNocDc64jxtSHYL0FjQvWIB/exec';
         const formData = new FormData();
         formData.append('name', document.getElementById('customer-name').value);
         formData.append('email', document.getElementById('customer-email').value);
