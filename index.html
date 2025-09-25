@@ -2,8 +2,12 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ダンスマス2025　出演希望＆DVD購入希望</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body { font-family: sans-serif; }
         .container { max-width: 700px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
@@ -11,7 +15,7 @@
         th { background-color: #f2f2f2; }
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="number"], input[type="text"], input[type="email"], select { width: 100%; padding: 8px; box-sizing: border-box; }
+        input[type="number"], input[type="text"], input[type="email"], select { width: 100%; padding: 8px; }
         input[type="number"] { text-align: center; }
         input[type="checkbox"] { display: block; margin: 0 auto; width: 20px; height: 20px; }
         .subtotal { text-align: right; }
@@ -22,18 +26,48 @@
         #confirmation-screen, #loading, #thank-you { display: none; }
 
         @media (max-width: 600px) {
-            .container { margin: 10px; padding: 15px; }
-            #product-table thead { display: none; }
-            #product-table, #product-table tbody, #product-table tr, #product-table td { display: block; width: 100%; }
-            #product-table tr { margin-bottom: 15px; border: 1px solid #ddd; }
-            #product-table td { text-align: right; padding-left: 50%; position: relative; border: none; border-bottom: 1px solid #eee; }
-            #product-table td:before { content: attr(data-label); position: absolute; left: 10px; width: 45%; padding-right: 10px; white-space: nowrap; text-align: left; font-weight: bold; }
-            #product-table td:last-child { border-bottom: none; }
-            #product-table td:nth-of-type(1):before { content: "作品/商品名"; }
-            #product-table td:nth-of-type(2):before { content: "選択"; }
-            #product-table td:nth-of-type(3):before { content: "小計(円)"; }
-            #product-table td input[type="checkbox"] { margin: 0 0 0 auto; }
-            #product-table td input[type="number"] { display: inline-block; width: 60px; }
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            #product-table thead {
+                display: none;
+            }
+            #product-table, #product-table tbody, #product-table tr, #product-table td {
+                display: block;
+                width: 100%;
+            }
+            #product-table tr {
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+            }
+            #product-table td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+                border: none;
+                border-bottom: 1px solid #eee;
+            }
+            #product-table td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+            }
+            #product-table td:last-child {
+                border-bottom: none;
+            }
+            #product-table td input[type="checkbox"] {
+                margin: 0 0 0 auto;
+            }
+            #product-table td input[type="number"] {
+                display: inline-block;
+                width: 60px;
+            }
         }
     </style>
 </head>
@@ -42,10 +76,7 @@
     <div id="input-screen">
         <h2>ダンスマス2025　出演希望＆DVD購入希望</h2>
         <form id="product-form">
-            <div class="form-group">
-                <label for="customer-name">出演者のお名前（1人ずつお申し込みください）:</label>
-                <input type="text" id="customer-name" name="name" required>
-            </div>
+            <div class="form-group"><label for="customer-name">出演者のお名前（1人ずつお申し込みください）:</label><input type="text" id="customer-name" name="name" required></div>
             <div class="form-group"><label for="customer-email">メールアドレス:</label><input type="email" id="customer-email" name="email" required></div>
             
             <hr style="margin: 20px 0;">
@@ -325,15 +356,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('total-amount').textContent = finalTotal.toLocaleString();
     }
     
-    // 確認画面の表示ロジック
+    // 確認画面の表示ロジック (変更なし)
     function showConfirmation() {
         const detailsContainer = document.getElementById('confirmation-details');
         detailsContainer.innerHTML = '';
         const customerName = document.getElementById('customer-name').value;
         const customerEmail = document.getElementById('customer-email').value;
-        // ▼▼▼ アラートメッセージを元に戻す ▼▼▼
         if (!customerName || !customerEmail) { alert('出演者のお名前とメールアドレスを入力してください。'); return; }
-        // ▼▼▼ 確認画面の表記を元に戻す ▼▼▼
         detailsContainer.innerHTML += `<p><strong>出演者のお名前:</strong> ${customerName}</p><p><strong>メールアドレス:</strong> ${customerEmail}</p><hr>`;
         const isBabyChecked = document.querySelector('.is-baby').checked;
         const classCount = document.querySelectorAll('.is-class:checked').length;
